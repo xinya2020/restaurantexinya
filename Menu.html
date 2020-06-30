@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>JQuery点击图片查看大图by starof</title>
+  <style type="text/css">
+    .exampleImg {
+      height: 100px;
+      cursor: pointer;
+    }
+  </style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript">
+    //alert($);
+    // (function (window, undefined) {
+    // var MyJQuery = function () {
+    // window.MyjQuery = window.$ = jQuery; window.$ = MyJQuery;
+    // };
+    // })(window);
+    // alert($);
+    $.fn.ImgZoomIn = function() {
+      bgstr = '<div id="ImgZoomInBG" style=" background:#000000; filter:Alpha(Opacity=70); opacity:0.7; position:fixed; left:0; top:0; z-index:10000; width:100%; height:100%; display:none;"><iframe src="about:blank" frameborder="5px" scrolling="yes" style="width:100%; height:100%;"></iframe></div>';
+      //alert($(this).attr('src'));
+      imgstr = '<img id="ImgZoomInImage" src="' + $(this).attr('src') + '" onclick=$(\'#ImgZoomInImage\').hide();$(\'#ImgZoomInBG\').hide(); style="cursor:pointer; display:none; position:absolute; z-index:10001;" />';
+      if ($('#ImgZoomInBG').length < 1) {
+        $('body').append(bgstr);
+      }
+      if ($('#ImgZoomInImage').length < 1) {
+        $('body').append(imgstr);
+      } else {
+        $('#ImgZoomInImage').attr('src', $(this).attr('src'));
+      }
+      //alert($(window).scrollLeft());
+      //alert( $(window).scrollTop());
+      $('#ImgZoomInImage').css('left', $(window).scrollLeft() + ($(window).width() - $('#ImgZoomInImage').width()) / 2);
+      $('#ImgZoomInImage').css('top', $(window).scrollTop() + ($(window).height() - $('#ImgZoomInImage').height()) / 2);
+      $('#ImgZoomInBG').show();
+      $('#ImgZoomInImage').show();
+    };
+    $(document).ready(function() {
+      $("#imgTest").bind("click", function() {
+        $(this).ImgZoomIn();
+      });
+    });
+  </script>
+</head>
+
+<body style="">
+  <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/css/bootstrap.min.css">
+  <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.js"></script>
+  <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script> //代码内容 <div class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand"><img src="" alt=""></a>
+      <!--设计响应式折叠菜单按钮 -->
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+        <span class="sr-only">汉堡菜单</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li class="dropdown" data-target="#dropdown-menu"><a href="#" data-toggle="dropdown">下拉菜单<i class="caret"></i></a>
+          <ul class="dropdown-menu" id="dropdown-menu">
+            <li><a href="#">项目一</a></li>
+            <li><a href="#">项目二</a></li>
+            <li><a href="#">项目三</a></li>
+          </ul>
+        </li>
+        <li><a href="#">产品</a></li>
+        <li><a href="#">关于</a></li>
+      </ul>
+    </div>
+  </div>
+  <div></div>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</body>
+
+</html>
